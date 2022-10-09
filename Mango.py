@@ -13,7 +13,7 @@ import time
 engine = pyttsx3.init("sapi5")
 voices = engine.getProperty("voices")
 
-engine.setProperty('voice', voices[1].id) 
+engine.setProperty('voice', voices[0].id) 
 
  # 1 for female and 0 for male voice
 
@@ -21,27 +21,29 @@ doing = ("Doing good, but not as you. ", "Looking good outside, but not inside."
 
 
 def speak(audio):
-    engine.say(audio)
+    engine.say(str(audio))
     engine.runAndWait()
 
 def wishMe():
     print("Happy Birthday Master")
-
+    
 def take_command():
     r = sr.Recognizer()
     with sr.Microphone() as source:
+
+        print("______________")
         print("Listening...")
-        r.pause_threshold = 20
+        r.pause_threshold = 2
         audio = r.listen(source)
+
+    
 
     
     try:
         print("Recognizing...")
         query = r.recognize_google(audio, language='en-in')
-        
-        if 'Mango' in query:
-
-            print("User said:" + query + "\n")
+        print("User said:" + query + "\n")
+        print("Margo said : " + audio)
     except Exception as e:
         print(e)
         speak("Sorry Master, I don't understand")
@@ -53,9 +55,20 @@ def take_command():
 if __name__ == '__main__':
 
     
-    speak("Mango Assistance Initializing......")
+    speak("Margo Assistance Initializing......")
     speak("How can i help you?, Master Riddo")
     speak("")
+    print('\033[2;34;49m' + """  ▄▄▄▄███▄▄▄▄      ▄████████    ▄████████    ▄██████▄   ▄██████▄  
+ ▄██▀▀▀███▀▀▀██▄   ███    ███   ███    ███   ███    ███ ███    ███ 
+ ███   ███   ███   ███    ███   ███    ███   ███    █▀  ███    ███ 
+ ███   ███   ███   ███    ███  ▄███▄▄▄▄██▀  ▄███        ███    ███ 
+ ███   ███   ███ ▀███████████ ▀▀███▀▀▀▀▀   ▀▀███ ████▄  ███    ███ 
+ ███   ███   ███   ███    ███ ▀███████████   ███    ███ ███    ███ 
+ ███   ███   ███   ███    ███   ███    ███   ███    ███ ███    ███ 
+  ▀█   ███   █▀    ███    █▀    ███    ███   ████████▀   ▀██████▀  
+                                ███    ███                         
+
+  VOICE ASSISTANT""")
 
     while True:
         query = take_command().lower()
@@ -99,11 +112,15 @@ if __name__ == '__main__':
             speak("opening local disk E")
             webbrowser.open("E://")
 
+        elif 'margo' in query:
+            speak("hello, sir")
+            speak("Wh")
+
         elif 'who are you' in query:
-            speak("I'm Mango. developed by Ahmed Shahmir Riddo")
+            speak("I'm Margo. A Voice Assistant Robot developed by Ahmed Shahmir Riddo")
 
         elif 'hello' in query:
-            speak("Hi, Sir. I am Mango.")
+            speak("Hi, Sir. I am Margo.")
 
         elif 'how are you' in query:
             speak('I am fine and What about you?, sir')
@@ -112,7 +129,7 @@ if __name__ == '__main__':
             speak("I am glad to know!")
 
         elif 'Thank you'in query:
-            speak("Youre most welcome")
+            speak("You are most welcome")
 
         elif 'joke' in query:
             speak(pyjokes.get_joke())
@@ -135,11 +152,11 @@ if __name__ == '__main__':
         elif 'Are you a robot' in query:
             speak("Yes, I am a Robot. Shahmir Riddo created me")
 
-        elif 'who is ri' in query:
-            speak("SHahmir Riddo is a Programmer.")
+        elif 'who is sha' in query:
+            speak("Shahmir Riddo is a Programmer.")
 
         elif 'what is your name' in query:
-            speak("My name is mango, what is your name?")
+            speak("My name is margo, what is your name?")
 
         elif 'my name is' in query:
             speak("Hello"+query)
@@ -151,9 +168,9 @@ if __name__ == '__main__':
             webbrowser.open("google.com")
         
         elif 'how old are you' in query:
-            speak("I am unborn")
+            speak("I am 1000 years old")
 
-        elif 'play music' in query:
+        elif 'music' in query:
             webbrowser.open("https://www.youtube.com/watch?v=R0rKB_bsUNg")
 
         elif 'wish me' in query:
@@ -166,6 +183,50 @@ if __name__ == '__main__':
         elif 'open facebook' in query:
             speak("Opening FB")
             webbrowser.open("www.facebook.com")
+
+        elif 'created you' in query:
+            speak("Shahmir Riddo created me")
+
+
+        elif 'compliment' in query:
+            speak("You are the best! sir")
+
+        elif 'rhyme' in query:
+            webbrowser.open("https://www.youtube.com/watch?v=T_mSo1dJRNg")
+
+        elif 'what can you do' in query:
+            speak("I can talk with you.")
+
+        elif 'do you know google' in query:
+            speak("Yes, I know them. They are my friends.")
+
+        elif 'who is your boss' in query:
+            speak("My master is Shahmir Riddo")
+
+        
+
+        elif 'remember that' in query:
+            speak("What should i remember? ")
+            data = take_command()
+            rembr = open("data.txt", "w")
+            for line in data:
+	
+	            rembr.write(line.replace("I am", "you"))
+                
+            speak("You told me to remember that " + data)
+            rembr.close()
+
+               
+        elif 'do you know anything' in query:
+            rm = open("data.txt", "r")
+            speak("You told me to remember that you" + rm.read())
+            
+
+
+
+        
+
+        
 
         
   
