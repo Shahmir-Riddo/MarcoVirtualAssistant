@@ -1,3 +1,3 @@
-# MangoVirtualAssistantPython
-Mango is a CLI Virtual Voice Assistant.
+# MargoVirtualAssistantPython
+Margo is a CLI Virtual Voice Assistant. 
 
