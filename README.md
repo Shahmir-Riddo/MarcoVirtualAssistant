@@ -4,7 +4,7 @@ Margo is a CLI Virtual Voice Assistant.
 
 
 <h1>Screenshot</h1>
-<img src="https://github.com/Shahmir-Riddo/MargoVirtualAssistant/blob/main/Screenshot%20(4).png" width="600" height="500">
+<img src="https://github.com/Shahmir-Riddo/MargoVirtualAssistant/blob/main/Screenshot%20(4).png" width="500" height="400">
 
 
 <h1> Logo</h1>
