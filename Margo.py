@@ -8,6 +8,7 @@ import pyjokes
 import random
 import requests
 import time
+
  
 # init pyttsx
 engine = pyttsx3.init("sapi5")
@@ -20,12 +21,15 @@ engine.setProperty('voice', voices[0].id)
 doing = ("Doing good, but not as you. ", "Looking good outside, but not inside.", "Just talking with you, sir", "In which terms, emotionally or financially?")
 
 
+
+
+
+
 def speak(audio):
     engine.say(str(audio))
     engine.runAndWait()
 
-def wishMe():
-    print("Happy Birthday Master")
+
     
 def take_command():
     r = sr.Recognizer()
@@ -43,10 +47,10 @@ def take_command():
         print("Recognizing...")
         query = r.recognize_google(audio, language='en-in')
         print("User said:" + query + "\n")
-        print("Margo said : " + audio)
+      
     except Exception as e:
         print(e)
-        speak("Sorry Master, I don't understand")
+        speak("sorry master, can you please repeat?")
         return "None"
     return query
 
@@ -55,7 +59,7 @@ def take_command():
 if __name__ == '__main__':
 
     
-    speak("Margo Assistance Initializing......")
+    speak("Margo Assistance Activated......")
     speak("How can i help you?, Master Riddo")
     speak("")
     print('\033[2;34;49m' + """  ▄▄▄▄███▄▄▄▄      ▄████████    ▄████████    ▄██████▄   ▄██████▄  
@@ -112,9 +116,10 @@ if __name__ == '__main__':
             speak("opening local disk E")
             webbrowser.open("E://")
 
-        elif 'margo' in query:
+        elif 'mar' in query:
             speak("hello, sir")
-            speak("Wh")
+            speak("Whats  the plan today?")
+            speak("")
 
         elif 'who are you' in query:
             speak("I'm Margo. A Voice Assistant Robot developed by Ahmed Shahmir Riddo")
@@ -123,7 +128,7 @@ if __name__ == '__main__':
             speak("Hi, Sir. I am Margo.")
 
         elif 'how are you' in query:
-            speak('I am fine and What about you?, sir')
+            speak('I am fine and, What about you?, sir')
 
         elif 'fine' in query:
             speak("I am glad to know!")
@@ -138,7 +143,8 @@ if __name__ == '__main__':
 
         elif 'good morning' in query:
             speak("Very Good Morning too, sir")
-            print("Very Good Morning")
+            speak("Have you done your breakfast?")
+      
      
         elif 'good night' in query:
             speak("Good Night, Sir")
@@ -155,12 +161,29 @@ if __name__ == '__main__':
         elif 'who is sha' in query:
             speak("Shahmir Riddo is a Programmer.")
 
-        elif 'what is your name' in query:
+        elif 'your name' in query:
             speak("My name is margo, what is your name?")
+            
+            r = open("name.txt", "w")
+            name = take_command()
+            for line in name:
+	
+	            r.write(line.replace('my name is', ''))
+                
+            speak("Hello" + name)
+            r.close()
 
-        elif 'my name is' in query:
-            speak("Hello"+query)
-
+        elif 'what is my name' in query:
+            speak(" what is your name?")
+            
+            r = open("name.txt", "w")
+            name = take_command()
+            for line in name:
+	
+	            r.write(line.replace('my name is', ''))
+                
+            speak("Hello" + name)
+#Shahmir Riddo        
         elif 'news' in query:
             webbrowser.open("bbcnews.com")
 
@@ -203,6 +226,8 @@ if __name__ == '__main__':
         elif 'who is your boss' in query:
             speak("My master is Shahmir Riddo")
 
+    
+            
         
 
         elif 'remember that' in query:
@@ -217,28 +242,52 @@ if __name__ == '__main__':
             rembr.close()
 
                
-        elif 'do you know anything' in query:
+        elif 'what did you remember' in query:
             rm = open("data.txt", "r")
             speak("You told me to remember that you" + rm.read())
+
+        elif 'reason for you' in query:
+            speak("I was created as a Minor project by Shahmir Riddo")
+
+        elif 'are you hungry' in query:
+            speak("Yes, I am hungry. Feed me please")
+
+        elif 'are you mad' in query:
+            speak("No, you are mad!")
             
+        elif 'do you have a brain' in query:
+            speak("Yes")
 
+        elif 'talk' in query:
+            speak("hey master, how is your day?")
+            bag = take_command()
+            if "bad" in bag:
+                speak("Dont worry, master.")
 
 
         
-
         
 
-        
-  
 
-        
-
-    
-    
         elif 'sleep' in query:
             exit(0)
 
+     
+                
 
+
+
+            
+
+            
+
+            
+    
+
+            
+
+        
+ 
 
 
 
