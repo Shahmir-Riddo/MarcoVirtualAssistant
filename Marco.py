@@ -7,7 +7,11 @@ import pyaudio
 import pyjokes
 import random
 import requests
+import wolframalpha
+import datetime as dt
 import time
+
+
 
  
 # init pyttsx
@@ -19,8 +23,8 @@ engine.setProperty('voice', voices[0].id)
  # 1 for female and 0 for male voice
 
 doing = ("Doing good, but not as you. ", "Looking good outside, but not inside.", "Just talking with you, sir", "In which terms, emotionally or financially?")
-
-
+greeting = ("What we gonna do today?", "Whats the plans for today", "master, are you busy?")
+hlo = ("Hello, master", "Sup, Master", "hey master","Hi, Master", "Hola, Master", "Greetings, master")
 
 
 
@@ -29,18 +33,31 @@ def speak(audio):
     engine.say(str(audio))
     engine.runAndWait()
 
+def wish():
+    tem = dt.datetime.now().strftime("%H:")
+    if tem == "1":
+        speak("Good Morning!, Master ")
+        speak("The is 1 AM. ")
 
+    elif tem == "10" :
+        speak("good night Master. Time to sleep. ")
+
+    
+
+
+    
     
 def take_command():
     r = sr.Recognizer()
     with sr.Microphone() as source:
-
+        
         print("______________")
         print("Listening...")
-        r.pause_threshold = 2
+        r.pause_threshold = 1
         audio = r.listen(source)
 
-    
+
+
 
     
     try:
@@ -59,23 +76,30 @@ def take_command():
 if __name__ == '__main__':
 
     
-    speak("Margo Assistance Activated......")
+    speak("Marco Assistance Activated......")
     speak("How can i help you?, Master Riddo")
     speak("")
-    print('\033[2;34;49m' + """  ▄▄▄▄███▄▄▄▄      ▄████████    ▄████████    ▄██████▄   ▄██████▄  
- ▄██▀▀▀███▀▀▀██▄   ███    ███   ███    ███   ███    ███ ███    ███ 
- ███   ███   ███   ███    ███   ███    ███   ███    █▀  ███    ███ 
- ███   ███   ███   ███    ███  ▄███▄▄▄▄██▀  ▄███        ███    ███ 
- ███   ███   ███ ▀███████████ ▀▀███▀▀▀▀▀   ▀▀███ ████▄  ███    ███ 
- ███   ███   ███   ███    ███ ▀███████████   ███    ███ ███    ███ 
- ███   ███   ███   ███    ███   ███    ███   ███    ███ ███    ███ 
-  ▀█   ███   █▀    ███    █▀    ███    ███   ████████▀   ▀██████▀  
-                                ███    ███                         
+    print('\033[1;32;49m' + """
 
+
+ ███▄ ▄███▓ ▄▄▄       ██▀███  ▄████▄  ▒█████  
+▓██▒▀█▀ ██▒▒████▄    ▓██ ▒ ██▒██▀ ▀█ ▒██▒  ██▒
+▓██    ▓██░▒██  ▀█▄  ▓██ ░▄█ ▒▓█    ▄▒██░  ██▒
+▒██    ▒██ ░██▄▄▄▄██ ▒██▀▀█▄ ▒▓▓▄ ▄██▒██   ██░
+▒██▒   ░██▒ ▓█   ▓██▒░██▓ ▒██▒ ▓███▀ ░ ████▓▒░
+░ ▒░   ░  ░ ▒▒   ▓▒█░░ ▒▓ ░▒▓░ ░▒ ▒  ░ ▒░▒░▒░ 
+░  ░      ░  ▒   ▒▒ ░  ░▒ ░ ▒░ ░  ▒    ░ ▒ ▒░ 
+░      ░     ░   ▒     ░░   ░░       ░ ░ ░ ▒  
+       ░         ░  ░   ░    ░ ░         ░ ░  
+                             ░                
+                                                             
+
+ 
   VOICE ASSISTANT""")
 
     while True:
         query = take_command().lower()
+        wish()
 
         
         
@@ -117,15 +141,16 @@ if __name__ == '__main__':
             webbrowser.open("E://")
 
         elif 'mar' in query:
-            speak("hello, sir")
-            speak("Whats  the plan today?")
-            speak("")
+            speak(random.choice(hlo))
+            speak(random.choice(greeting))
+            a = take_command()
+            speak("Ok, Master")
 
         elif 'who are you' in query:
-            speak("I'm Margo. A Voice Assistant Robot developed by Ahmed Shahmir Riddo")
+            speak("I'm Marco. A Voice Assistant Robot developed by Ahmed Shahmir Riddo")
 
         elif 'hello' in query:
-            speak("Hi, Sir. I am Margo.")
+            speak("Hi, Sir. I am Marco.")
 
         elif 'how are you' in query:
             speak('I am fine and, What about you?, sir')
@@ -143,6 +168,9 @@ if __name__ == '__main__':
 
         elif 'good morning' in query:
             speak("Very Good Morning too, sir")
+           
+            
+            
             speak("Have you done your breakfast?")
       
      
@@ -158,23 +186,24 @@ if __name__ == '__main__':
         elif 'Are you a robot' in query:
             speak("Yes, I am a Robot. Shahmir Riddo created me")
 
-        elif 'who is sha' in query:
+        elif 'who is ri' in query:
             speak("Shahmir Riddo is a Programmer.")
 
         elif 'your name' in query:
-            speak("My name is margo, what is your name?")
+            speak("My name is marco, what is your name?")
             
             r = open("name.txt", "w")
             name = take_command()
             for line in name:
 	
-	            r.write(line.replace('my name is', ''))
+	    
+                 r.write(line.replace('my name is', ','))
                 
             speak("Hello" + name)
             r.close()
 
         elif 'what is my name' in query:
-            speak(" what is your name?")
+            speak("I forgot, please tell me what is your name?")
             
             r = open("name.txt", "w")
             name = take_command()
@@ -183,7 +212,8 @@ if __name__ == '__main__':
 	            r.write(line.replace('my name is', ''))
                 
             speak("Hello" + name)
-#Shahmir Riddo        
+
+        
         elif 'news' in query:
             webbrowser.open("bbcnews.com")
 
@@ -195,6 +225,9 @@ if __name__ == '__main__':
 
         elif 'music' in query:
             webbrowser.open("https://www.youtube.com/watch?v=R0rKB_bsUNg")
+
+        elif 'stop music' in query:
+            time.sleep(60)
 
         elif 'wish me' in query:
             speak("Happy Birthday")
@@ -236,13 +269,17 @@ if __name__ == '__main__':
             rembr = open("data.txt", "w")
             for line in data:
 	
-	            rembr.write(line.replace("I am", "you"))
+	            rembr.write(line.replace("I", "you"))
                 
             speak("You told me to remember that " + data)
             rembr.close()
 
                
-        elif 'what did you remember' in query:
+        elif 'what did you remember'  in query:
+            rm = open("data.txt", "r")
+            speak("You told me to remember that you" + rm.read())
+
+        elif 'remind me'  in query:
             rm = open("data.txt", "r")
             speak("You told me to remember that you" + rm.read())
 
@@ -264,30 +301,25 @@ if __name__ == '__main__':
             if "bad" in bag:
                 speak("Dont worry, master.")
 
+        elif 'time' in query:
 
+            time=dt.datetime.now().strftime("%H:%M:%S")   #24 hour format
+            
+            speak("The Current time is: ")
+            speak(time)
+
+        elif 'can you get smart' in query:
+            speak("No, I cant change myself!!")
+
+        elif 'are we friends' in query:
+            speak("Yes, We are")
+
+        elif 'bangladesh' in query:
+            speak("Bangladesh  , officially the People's Republic of Bangladesh, is a country in South Asia. It is the eighth-most populous country in the world, with a population exceeding 165 million people in an area of 148,460 square kilometres (57,320 sq mi).[7] Bangladesh is among the most densely populated countries in the world, and shares land borders with India to the west, north, and east, and Myanmar to the southeast; to the south it has a coastline along the Bay of Bengal. It is narrowly separated from Bhutan and Nepal by the Siliguri Corridor; and from China by the Indian state of Sikkim in the north. Dhaka, the capital and largest city, is the nation's political, financial and cultural center. Chittagong, the second-largest city, is the busiest port on the Bay of Bengal. The official language is Bengali, one of the easternmost branches of the Indo-European language family.")
         
-        
-
-
+        elif 'bored' in query:
+            speak("")
         elif 'sleep' in query:
-            exit(0)
+            time.sleep(600)
 
-     
-                
-
-
-
-            
-
-            
-
-            
-    
-
-            
-
-        
  
-
-
-
